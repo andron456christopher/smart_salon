@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Juice-like Salon</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">JUICE<span class="accent">.</span></div>
+      <nav class="main-nav">
+        <a href="#services">Services</a>
+        <a href="#shop">Shop</a>
+        <a href="#locations">Locate Us</a>
+        <a href="#book" class="cta">Book Appointment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner container">
+        <h1>Welcome to Juice Salon</h1>
+        <p class="lead">Classic beauty with a modern touch</p>
+        <a class="btn" href="#book">View Salon Menu</a>
+      </div>
+    </section>
+
+    <section id="services" class="container services">
+      <h2>Our Services</h2>
+      <div class="grid">
+        {% for s in services %}
+        <div class="card">
+          <h3>{{ s.name }}</h3>
+          <p>{{ s.desc }}</p>
+          <div class="price">{{ s.price }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="shop" class="container shop">
+      <h2>Shop Luxury Haircare & Beauty Products</h2>
+      <p>Explore top brands.</p>
+      <a class="btn" href="#">Explore Products</a>
+    </section>
+
+    <section id="locations" class="container locations">
+      <h2>Our Locations</h2>
+      <ul>
+        {% for loc in locations %}
+          <li>{{ loc }} <a class="small-cta" href="#book">Book Now</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="container reviews">
+      <h2>Testimonials</h2>
+      {% for r in reviews %}
+      <blockquote>
+        <p>{{ r.text }}</p>
+        <footer>— {{ r.name }}</footer>
+      </blockquote>
+      {% endfor %}
+    </section>
+
+    <section id="book" class="container book-section">
+      <h2>Book an Appointment</h2>
+      <form id="bookForm">
+        <input name="name" placeholder="Your name" required />
+        <input name="phone" placeholder="Phone" required />
+        <select name="service" required>
+          <option value="">Select service</option>
+          <option>Haircut</option>
+          <option>Hair Color</option>
+          <option>Facial</option>
+          <option>Nails</option>
+        </select>
+        <input type="date" name="date" required />
+        <input type="time" name="time" required />
+        <button type="submit" class="btn">Book</button>
+      </form>
+      <div id="bookResult" class="book-result"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>Head Office — 502 Sapphire, S.V. road, Khar West, Mumbai</div>
+      <div>© 2025 Juice Salons</div>
+    </div>
+  </footer>
+
+  <!-- Chatbot Floating Button & Window -->
+  <div id="chatbot-container">
+    <button id="chatToggle" title="Chat with AI" aria-label="Open chat">💬</button>
+
+    <div id="chatBox" class="hidden" role="dialog" aria-label="Salon assistant">
+      <div class="chat-head">
+        <strong>Salon Assistant</strong>
+        <button id="chatClose" aria-label="Close chat">✕</button>
+      </div>
+
+      <div id="chatMessages" class="chat-body" aria-live="polite"></div>
+
+      <div class="chat-input">
+        <input id="chatInput" placeholder="e.g. Book haircut on 2025-12-20 at 15:00 for Rahul 9876543210" aria-label="Chat message"/>
+        <button id="chatSend">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/chat.js"></script>
+</body>
+</html>
